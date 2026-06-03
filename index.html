@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Cozy Cup Café</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -20,34 +20,39 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#menu">Menu</a></li>
+      <li><a href="#reservation">Reserve</a></li>
       <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reviews">Reviews</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
   <section class="hero" id="home">
-    <div class="hero-content">
+    <div class="hero-content reveal">
       <p class="hero-tagline">Est. 2024 · Colombo</p>
       <h1>Where Every Sip<br/><em>Feels Like Home</em></h1>
       <p class="hero-sub">Fresh brews, warm bites, and good vibes — all under one roof.</p>
-      <a href="#menu" class="btn">View Our Menu</a>
+      <div class="hero-btns">
+        <a href="#menu" class="btn">View Our Menu</a>
+        <a href="#reservation" class="btn btn-outline">Book a Table</a>
+      </div>
     </div>
-    <div class="hero-img">
-      <div class="hero-img-placeholder">☕</div>
+    <div class="hero-img reveal reveal-right">
+      <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80" alt="Cozy café coffee cup" class="hero-photo"/>
     </div>
   </section>
 
   <!-- ABOUT -->
   <section class="about section" id="about">
     <div class="container about-grid">
-      <div class="about-text">
+      <div class="about-text reveal">
         <span class="section-label">Our Story</span>
         <h2>A Little Café with a Big Heart</h2>
         <p>The Cozy Cup started as a dream — a place where the aroma of freshly ground coffee fills the air and every corner invites you to slow down. We source our beans from local farms and bake everything fresh each morning.</p>
         <p>Whether you're catching up with a friend or finding your quiet corner to work, we've got the perfect cup waiting for you.</p>
       </div>
-      <div class="about-card">
+      <div class="about-card reveal reveal-right">
         <div class="about-stat"><strong>50+</strong><span>Menu Items</span></div>
         <div class="about-stat"><strong>100%</strong><span>Local Ingredients</span></div>
         <div class="about-stat"><strong>7 Days</strong><span>Always Open</span></div>
@@ -58,39 +63,89 @@
   <!-- MENU -->
   <section class="menu-section section" id="menu">
     <div class="container">
-      <span class="section-label">What We Serve</span>
-      <h2>Our Menu</h2>
-      <div class="menu-tabs">
+      <span class="section-label" style="display:block;text-align:center;">What We Serve</span>
+      <h2 style="text-align:center;" class="reveal">Our Menu</h2>
+      <div class="menu-tabs reveal">
         <button class="tab-btn active" data-tab="drinks">Drinks</button>
         <button class="tab-btn" data-tab="food">Food</button>
         <button class="tab-btn" data-tab="desserts">Desserts</button>
       </div>
-
       <div class="menu-grid active" id="drinks">
-        <div class="menu-card"><div class="menu-icon">☕</div><h3>Espresso</h3><p>Rich & bold single shot</p><span class="price">Rs. 350</span></div>
-        <div class="menu-card"><div class="menu-icon">🥛</div><h3>Flat White</h3><p>Smooth espresso with silky milk</p><span class="price">Rs. 550</span></div>
-        <div class="menu-card"><div class="menu-icon">🧊</div><h3>Iced Latte</h3><p>Chilled espresso & cold milk</p><span class="price">Rs. 600</span></div>
-        <div class="menu-card"><div class="menu-icon">🍵</div><h3>Matcha Latte</h3><p>Ceremonial grade matcha</p><span class="price">Rs. 650</span></div>
-        <div class="menu-card"><div class="menu-icon">🍫</div><h3>Hot Chocolate</h3><p>Creamy Belgian chocolate</p><span class="price">Rs. 500</span></div>
-        <div class="menu-card"><div class="menu-icon">🧃</div><h3>Fresh Juice</h3><p>Seasonal fruits, daily pressed</p><span class="price">Rs. 450</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">☕</div><h3>Espresso</h3><p>Rich & bold single shot</p><span class="price">Rs. 350</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🥛</div><h3>Flat White</h3><p>Smooth espresso with silky milk</p><span class="price">Rs. 550</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🧊</div><h3>Iced Latte</h3><p>Chilled espresso & cold milk</p><span class="price">Rs. 600</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🍵</div><h3>Matcha Latte</h3><p>Ceremonial grade matcha</p><span class="price">Rs. 650</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🍫</div><h3>Hot Chocolate</h3><p>Creamy Belgian chocolate</p><span class="price">Rs. 500</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🧃</div><h3>Fresh Juice</h3><p>Seasonal fruits, daily pressed</p><span class="price">Rs. 450</span></div>
       </div>
-
       <div class="menu-grid" id="food">
-        <div class="menu-card"><div class="menu-icon">🥐</div><h3>Butter Croissant</h3><p>Flaky, golden & fresh baked</p><span class="price">Rs. 300</span></div>
-        <div class="menu-card"><div class="menu-icon">🥪</div><h3>Club Sandwich</h3><p>Triple-layered with chicken</p><span class="price">Rs. 850</span></div>
-        <div class="menu-card"><div class="menu-icon">🥗</div><h3>Garden Salad</h3><p>Mixed greens, feta & vinaigrette</p><span class="price">Rs. 700</span></div>
-        <div class="menu-card"><div class="menu-icon">🍳</div><h3>Eggs Benedict</h3><p>Poached eggs on toasted muffin</p><span class="price">Rs. 950</span></div>
-        <div class="menu-card"><div class="menu-icon">🥞</div><h3>Pancake Stack</h3><p>With maple syrup & berries</p><span class="price">Rs. 800</span></div>
-        <div class="menu-card"><div class="menu-icon">🫓</div><h3>Avocado Toast</h3><p>Sourdough, avo & poached egg</p><span class="price">Rs. 750</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🥐</div><h3>Butter Croissant</h3><p>Flaky, golden & fresh baked</p><span class="price">Rs. 300</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🥪</div><h3>Club Sandwich</h3><p>Triple-layered with chicken</p><span class="price">Rs. 850</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🥗</div><h3>Garden Salad</h3><p>Mixed greens, feta & vinaigrette</p><span class="price">Rs. 700</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🍳</div><h3>Eggs Benedict</h3><p>Poached eggs on toasted muffin</p><span class="price">Rs. 950</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🥞</div><h3>Pancake Stack</h3><p>With maple syrup & berries</p><span class="price">Rs. 800</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🫓</div><h3>Avocado Toast</h3><p>Sourdough, avo & poached egg</p><span class="price">Rs. 750</span></div>
       </div>
-
       <div class="menu-grid" id="desserts">
-        <div class="menu-card"><div class="menu-icon">🍰</div><h3>Cheesecake</h3><p>New York style, berry compote</p><span class="price">Rs. 550</span></div>
-        <div class="menu-card"><div class="menu-icon">🍮</div><h3>Crème Brûlée</h3><p>Classic French custard</p><span class="price">Rs. 600</span></div>
-        <div class="menu-card"><div class="menu-icon">🍪</div><h3>Cookie Platter</h3><p>Assorted freshly baked cookies</p><span class="price">Rs. 400</span></div>
-        <div class="menu-card"><div class="menu-icon">🧁</div><h3>Cupcakes</h3><p>Daily rotating flavours</p><span class="price">Rs. 350</span></div>
-        <div class="menu-card"><div class="menu-icon">🍫</div><h3>Brownie</h3><p>Warm fudge brownie & ice cream</p><span class="price">Rs. 500</span></div>
-        <div class="menu-card"><div class="menu-icon">🍨</div><h3>Affogato</h3><p>Espresso poured over vanilla gelato</p><span class="price">Rs. 650</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🍰</div><h3>Cheesecake</h3><p>New York style, berry compote</p><span class="price">Rs. 550</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🍮</div><h3>Crème Brûlée</h3><p>Classic French custard</p><span class="price">Rs. 600</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🍪</div><h3>Cookie Platter</h3><p>Assorted freshly baked cookies</p><span class="price">Rs. 400</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🧁</div><h3>Cupcakes</h3><p>Daily rotating flavours</p><span class="price">Rs. 350</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🍫</div><h3>Brownie</h3><p>Warm fudge brownie & ice cream</p><span class="price">Rs. 500</span></div>
+        <div class="menu-card reveal"><div class="menu-icon">🍨</div><h3>Affogato</h3><p>Espresso poured over vanilla gelato</p><span class="price">Rs. 650</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESERVATION -->
+  <section class="reservation-section section" id="reservation">
+    <div class="container">
+      <span class="section-label" style="display:block;text-align:center;">Book Ahead</span>
+      <h2 style="text-align:center;" class="reveal">Reserve a Table</h2>
+      <div class="reservation-form reveal">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your Name</label>
+            <input type="text" id="res-name" placeholder="Dewmini"/>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="res-email" placeholder="you@email.com"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="res-date"/>
+          </div>
+          <div class="form-group">
+            <label>Time</label>
+            <select id="res-time">
+              <option value="">Select a time</option>
+              <option>7:00 AM</option><option>8:00 AM</option><option>9:00 AM</option>
+              <option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option>
+              <option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option>
+              <option>4:00 PM</option><option>5:00 PM</option><option>6:00 PM</option>
+              <option>7:00 PM</option><option>8:00 PM</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Guests</label>
+            <select id="res-guests">
+              <option value="">No. of guests</option>
+              <option>1</option><option>2</option><option>3</option>
+              <option>4</option><option>5</option><option>6+</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Special Requests (optional)</label>
+          <textarea id="res-notes" rows="3" placeholder="Any dietary needs or special occasions?"></textarea>
+        </div>
+        <div style="text-align:center;">
+          <button class="btn" id="resBtn">Confirm Reservation</button>
+          <p id="resMsg" class="form-success"></p>
+        </div>
       </div>
     </div>
   </section>
@@ -99,13 +154,53 @@
   <section class="gallery-section section" id="gallery">
     <div class="container">
       <span class="section-label">Our Space</span>
-      <h2>A Peek Inside</h2>
-      <div class="gallery-grid">
-        <div class="gallery-item g1"><span>Morning Brews</span></div>
-        <div class="gallery-item g2"><span>Cozy Corners</span></div>
-        <div class="gallery-item g3"><span>Fresh Bakes</span></div>
-        <div class="gallery-item g4"><span>Outdoor Seating</span></div>
-        <div class="gallery-item g5"><span>Weekend Vibes</span></div>
+      <h2 class="reveal">A Peek Inside</h2>
+      <div class="gallery-grid reveal">
+        <div class="gallery-item g1">
+          <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=600&q=80" alt="Morning brews"/>
+          <span>Morning Brews</span>
+        </div>
+        <div class="gallery-item g2">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80" alt="Cozy corners"/>
+          <span>Cozy Corners</span>
+        </div>
+        <div class="gallery-item g3">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&q=80" alt="Fresh bakes"/>
+          <span>Fresh Bakes</span>
+        </div>
+        <div class="gallery-item g4">
+          <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=600&q=80" alt="Outdoor seating"/>
+          <span>Outdoor Seating</span>
+        </div>
+        <div class="gallery-item g5">
+          <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=600&q=80" alt="Weekend vibes"/>
+          <span>Weekend Vibes</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews-section section" id="reviews">
+    <div class="container">
+      <span class="section-label" style="display:block;text-align:center;">What People Say</span>
+      <h2 style="text-align:center;" class="reveal">Customer Reviews</h2>
+      <div class="reviews-grid">
+        <div class="review-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>"The best flat white I've had in Colombo. The atmosphere is so warm and inviting — I come here every single morning before work."</p>
+          <div class="reviewer"><div class="reviewer-avatar">AS</div><div><strong>Amara Silva</strong><span>Regular Customer</span></div></div>
+        </div>
+        <div class="review-card reveal">
+          <div class="stars">★★★★★</div>
+          <p>"Their cheesecake is absolutely divine! And the staff are incredibly friendly. This is my go-to spot for weekend brunches with my family."</p>
+          <div class="reviewer"><div class="reviewer-avatar">RP</div><div><strong>Ravi Perera</strong><span>Food Blogger</span></div></div>
+        </div>
+        <div class="review-card reveal">
+          <div class="stars">★★★★☆</div>
+          <p>"Great ambiance for working remotely. Fast WiFi, great coffee, and the avocado toast is a must-try. Highly recommend the matcha latte!"</p>
+          <div class="reviewer"><div class="reviewer-avatar">NK</div><div><strong>Nisha Kumar</strong><span>Freelance Designer</span></div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -113,7 +208,7 @@
   <!-- CONTACT -->
   <section class="contact-section section" id="contact">
     <div class="container contact-grid">
-      <div class="contact-info">
+      <div class="contact-info reveal">
         <span class="section-label">Find Us</span>
         <h2>Visit The Cozy Cup</h2>
         <div class="info-item">📍 <span>42 Galle Road, Colombo 03</span></div>
@@ -124,8 +219,14 @@
           <p>Monday – Friday: 7:00 AM – 9:00 PM</p>
           <p>Saturday – Sunday: 8:00 AM – 10:00 PM</p>
         </div>
+        <div class="map-embed">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.0!2d79.8567!3d6.9127!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae259251b5600ef%3A0x3d28cfa1a3fe8e17!2sGalle%20Rd%2C%20Colombo%2003!5e0!3m2!1sen!2slk!4v1699000000000!5m2!1sen!2slk"
+            width="100%" height="220" style="border:0;border-radius:12px;" allowfullscreen="" loading="lazy">
+          </iframe>
+        </div>
       </div>
-      <div class="contact-form">
+      <div class="contact-form reveal reveal-right">
         <h3>Send Us a Message</h3>
         <div class="form-group">
           <input type="text" id="name" placeholder="Your Name"/>
