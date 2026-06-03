@@ -1,26 +1,28 @@
 // Mobile nav toggle
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
-
-navToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-});
-
-// Close nav when a link is clicked
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => navLinks.classList.remove('open'));
-});
+navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
 
 // Navbar shadow on scroll
 const navbar = document.querySelector('.navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
-});
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+
+// Scroll reveal animations
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
 
 // Menu tabs
 const tabBtns = document.querySelectorAll('.tab-btn');
 const menuGrids = document.querySelectorAll('.menu-grid');
-
 tabBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     tabBtns.forEach(b => b.classList.remove('active'));
@@ -30,10 +32,56 @@ tabBtns.forEach(btn => {
   });
 });
 
-// Contact form with Formspree
+// Reservation form
+const resBtn = document.getElementById('resBtn');
+const resMsg = document.getElementById('resMsg');
+resBtn.addEventListener('click', async () => {
+  const name = document.getElementById('res-name').value.trim();
+  const email = document.getElementById('res-email').value.trim();
+  const date = document.getElementById('res-date').value;
+  const time = document.getElementById('res-time').value;
+  const guests = document.getElementById('res-guests').value;
+  const notes = document.getElementById('res-notes').value.trim();
+
+  if (!name || !email || !date || !time || !guests) {
+    resMsg.style.color = '#c0392b';
+    resMsg.textContent = 'Please fill in all required fields.';
+    return;
+  }
+
+  resBtn.textContent = 'Confirming...';
+  resBtn.disabled = true;
+
+  try {
+    const response = await fetch('https://formspree.io/f/xjgdbevj', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ name, email, date, time, guests, notes, type: 'Reservation' })
+    });
+    if (response.ok) {
+      resMsg.style.color = '#c0704a';
+      resMsg.textContent = `Reservation confirmed for ${name} on ${date} at ${time}! See you soon ☕`;
+      document.getElementById('res-name').value = '';
+      document.getElementById('res-email').value = '';
+      document.getElementById('res-date').value = '';
+      document.getElementById('res-time').value = '';
+      document.getElementById('res-guests').value = '';
+      document.getElementById('res-notes').value = '';
+    } else {
+      resMsg.style.color = '#c0392b';
+      resMsg.textContent = 'Something went wrong. Please try again.';
+    }
+  } catch {
+    resMsg.style.color = '#c0392b';
+    resMsg.textContent = 'Network error. Please check your connection.';
+  }
+  resBtn.textContent = 'Confirm Reservation';
+  resBtn.disabled = false;
+});
+
+// Contact form
 const sendBtn = document.getElementById('sendBtn');
 const formMsg = document.getElementById('formMsg');
-
 sendBtn.addEventListener('click', async () => {
   const name = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
@@ -52,9 +100,8 @@ sendBtn.addEventListener('click', async () => {
     const response = await fetch('https://formspree.io/f/xjgdbevj', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ name, email, message })
+      body: JSON.stringify({ name, email, message, type: 'Contact' })
     });
-
     if (response.ok) {
       formMsg.style.color = '#c0704a';
       formMsg.textContent = `Thanks ${name}! We'll get back to you soon. ☕`;
@@ -65,11 +112,10 @@ sendBtn.addEventListener('click', async () => {
       formMsg.style.color = '#c0392b';
       formMsg.textContent = 'Something went wrong. Please try again.';
     }
-  } catch (err) {
+  } catch {
     formMsg.style.color = '#c0392b';
     formMsg.textContent = 'Network error. Please check your connection.';
   }
-
   sendBtn.textContent = 'Send Message';
   sendBtn.disabled = false;
 });
