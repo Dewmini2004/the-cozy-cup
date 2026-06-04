@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 – Page Not Found | The Cozy Cup</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #fdf6ee; --brown: #5c3d2e; --terracotta: #c0704a;
+      --beige: #f0e0cc; --text-muted: #7a5c47; --white: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Lato', sans-serif;
+      background: var(--cream);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    .cup { font-size: 6rem; animation: wobble 2s ease-in-out infinite; display: block; margin-bottom: 1rem; }
+    @keyframes wobble {
+      0%,100% { transform: rotate(-8deg); }
+      50% { transform: rotate(8deg); }
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(5rem, 15vw, 10rem);
+      color: var(--beige);
+      line-height: 1;
+      margin-bottom: 0.2rem;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      color: var(--brown);
+      margin-bottom: 1rem;
+    }
+    p { color: var(--text-muted); font-size: 1.05rem; max-width: 420px; margin-bottom: 2.5rem; }
+    .btn {
+      display: inline-block;
+      background: var(--terracotta);
+      color: var(--white);
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 1px;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn:hover { background: var(--brown); transform: translateY(-2px); }
+    .steam { font-size: 1.5rem; letter-spacing: 8px; color: var(--beige); margin-top: 3rem; opacity: 0.6; }
+  </style>
+</head>
+<body>
+  <span class="cup">☕</span>
+  <h1>404</h1>
+  <h2>Oops! This page got cold.</h2>
+  <p>Looks like this page wandered off — maybe it's on a coffee break. Let's get you back to something warm.</p>
+  <a href="index.html" class="btn">Take Me Home</a>
+  <p class="steam">~ ~ ~</p>
+</body>
+</html>
