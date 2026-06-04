@@ -51,13 +51,13 @@
     </div>
   </section>
 
-  <!-- COUNTDOWN OFFER -->
+  <!-- COUNTDOWN -->
   <section class="countdown-section" id="offer">
     <div class="container countdown-inner reveal">
       <div class="countdown-text">
         <span class="section-label">Limited Time</span>
         <h2>Happy Hour Offer ☕</h2>
-        <p>Get <strong>20% off all drinks</strong> every weekday from 3 PM – 5 PM. Offer resets daily — don't miss it!</p>
+        <p>Get <strong>20% off all drinks</strong> every weekday from 3 PM – 5 PM. Offer resets daily!</p>
       </div>
       <div class="countdown-timer">
         <div class="timer-block"><span id="cd-hours">00</span><label>Hours</label></div>
@@ -181,10 +181,42 @@
     <div class="container">
       <span class="section-label" style="display:block;text-align:center;">What People Say</span>
       <h2 style="text-align:center;" class="reveal">Customer Reviews</h2>
-      <div class="reviews-grid">
-        <div class="review-card reveal"><div class="stars">★★★★★</div><p>"The best flat white I've had in Colombo. The atmosphere is so warm and inviting — I come here every single morning before work."</p><div class="reviewer"><div class="reviewer-avatar">AS</div><div><strong>Amara Silva</strong><span>Regular Customer</span></div></div></div>
-        <div class="review-card reveal"><div class="stars">★★★★★</div><p>"Their cheesecake is absolutely divine! And the staff are incredibly friendly. This is my go-to spot for weekend brunches with my family."</p><div class="reviewer"><div class="reviewer-avatar">RP</div><div><strong>Ravi Perera</strong><span>Food Blogger</span></div></div></div>
-        <div class="review-card reveal"><div class="stars">★★★★☆</div><p>"Great ambiance for working remotely. Fast WiFi, great coffee, and the avocado toast is a must-try. Highly recommend the matcha latte!"</p><div class="reviewer"><div class="reviewer-avatar">NK</div><div><strong>Nisha Kumar</strong><span>Freelance Designer</span></div></div></div>
+
+      <!-- SUBMIT FORM -->
+      <div class="review-form-box reveal">
+        <h3>Leave a Review ✍️</h3>
+        <div class="form-row">
+          <div class="form-group"><label>Your Name</label><input type="text" id="rv-name" placeholder="Your name"/></div>
+          <div class="form-group">
+            <label>Rating</label>
+            <div class="star-picker" id="starPicker">
+              <span data-val="1">★</span>
+              <span data-val="2">★</span>
+              <span data-val="3">★</span>
+              <span data-val="4">★</span>
+              <span data-val="5">★</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group"><label>Your Review</label><textarea id="rv-text" rows="3" placeholder="Tell us about your experience..."></textarea></div>
+        <button class="btn" id="rvSubmit">Submit Review</button>
+        <p id="rvMsg" class="form-success"></p>
+      </div>
+
+      <!-- LIVE DISPLAY -->
+      <div class="reviews-live-header">
+        <p id="rvCount" class="rv-count"></p>
+        <div class="rv-sort">
+          <label>Sort by:</label>
+          <select id="rvSort">
+            <option value="newest">Newest First</option>
+            <option value="highest">Highest Rated</option>
+            <option value="lowest">Lowest Rated</option>
+          </select>
+        </div>
+      </div>
+      <div class="reviews-grid" id="reviewsGrid">
+        <div class="rv-loading">Loading reviews... ☕</div>
       </div>
     </div>
   </section>
@@ -229,7 +261,7 @@
   <!-- COOKIE CONSENT -->
   <div class="cookie-banner" id="cookieBanner">
     <div class="cookie-content">
-      <span>🍪 We use cookies to improve your experience on our site. By continuing, you agree to our use of cookies.</span>
+      <span>🍪 We use cookies to improve your experience. By continuing, you agree to our use of cookies.</span>
       <div class="cookie-btns">
         <button class="btn" id="cookieAccept">Accept All</button>
         <button class="btn btn-outline" id="cookieDecline">Decline</button>
