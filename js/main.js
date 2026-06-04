@@ -1,3 +1,8 @@
+// ── CONFIG ──
+const JSONBIN_BIN_ID = '6a2133ceda38895dfe85373f';
+const JSONBIN_KEY = '$2a$10$KSgO4UIPUUjxFhx.T96MdegtzwN4Y5OImEEGHcx.Ct1NHyxFvZGaa';
+const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
+
 // Mobile nav toggle
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
@@ -99,7 +104,7 @@ darkBtn.addEventListener('click', () => {
   localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
 
-// Promo banner dismiss
+// Promo banner
 const promoBanner = document.getElementById('promoBanner');
 const promoClose = document.getElementById('promoClose');
 if (sessionStorage.getItem('promoDismissed')) promoBanner.style.display = 'none';
@@ -108,13 +113,12 @@ promoClose.addEventListener('click', () => {
   sessionStorage.setItem('promoDismissed', 'true');
 });
 
-// ── COUNTDOWN TIMER (counts to next 5 PM weekday happy hour) ──
+// Countdown timer
 function getNextHappyHour() {
   const now = new Date();
   const target = new Date();
-  target.setHours(17, 0, 0, 0); // 5 PM end of happy hour
-  const day = now.getDay(); // 0=Sun, 6=Sat
-  // If weekend or past 5 PM, find next weekday 5 PM
+  target.setHours(17, 0, 0, 0);
+  const day = now.getDay();
   if (day === 0 || day === 6 || now >= target) {
     let daysAhead = 1;
     while (true) {
@@ -127,42 +131,134 @@ function getNextHappyHour() {
   }
   return target;
 }
-
 function updateCountdown() {
-  const now = new Date();
-  const target = getNextHappyHour();
-  const diff = target - now;
+  const diff = getNextHappyHour() - new Date();
   const timerEl = document.querySelector('.countdown-timer');
-
-  if (diff <= 0) {
-    timerEl.innerHTML = '<p class="timer-ended">Happy Hour is on right now! 🎉</p>';
-    return;
-  }
-
-  const hours = Math.floor(diff / 3600000);
-  const mins = Math.floor((diff % 3600000) / 60000);
-  const secs = Math.floor((diff % 60000) / 1000);
-
-  document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-  document.getElementById('cd-minutes').textContent = String(mins).padStart(2, '0');
-  document.getElementById('cd-seconds').textContent = String(secs).padStart(2, '0');
+  if (diff <= 0) { timerEl.innerHTML = '<p class="timer-ended">Happy Hour is on right now! 🎉</p>'; return; }
+  document.getElementById('cd-hours').textContent = String(Math.floor(diff / 3600000)).padStart(2, '0');
+  document.getElementById('cd-minutes').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+  document.getElementById('cd-seconds').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-// ── COOKIE CONSENT ──
+// Cookie consent
 const cookieBanner = document.getElementById('cookieBanner');
-const cookieAccept = document.getElementById('cookieAccept');
-const cookieDecline = document.getElementById('cookieDecline');
+if (!localStorage.getItem('cookieConsent')) setTimeout(() => cookieBanner.classList.add('show'), 1500);
+document.getElementById('cookieAccept').addEventListener('click', () => { localStorage.setItem('cookieConsent', 'accepted'); cookieBanner.classList.remove('show'); });
+document.getElementById('cookieDecline').addEventListener('click', () => { localStorage.setItem('cookieConsent', 'declined'); cookieBanner.classList.remove('show'); });
 
-if (!localStorage.getItem('cookieConsent')) {
-  setTimeout(() => cookieBanner.classList.add('show'), 1500);
+// ── REAL-TIME REVIEWS ──
+let allReviews = [];
+let selectedStars = 0;
+
+// Star picker
+const starSpans = document.querySelectorAll('#starPicker span');
+starSpans.forEach(star => {
+  star.addEventListener('mouseover', () => highlightStars(+star.dataset.val));
+  star.addEventListener('mouseout', () => highlightStars(selectedStars));
+  star.addEventListener('click', () => { selectedStars = +star.dataset.val; highlightStars(selectedStars); });
+});
+function highlightStars(n) {
+  starSpans.forEach(s => s.classList.toggle('active', +s.dataset.val <= n));
 }
-cookieAccept.addEventListener('click', () => {
-  localStorage.setItem('cookieConsent', 'accepted');
-  cookieBanner.classList.remove('show');
+
+// Fetch reviews from JSONBin
+async function fetchReviews() {
+  try {
+    const res = await fetch(JSONBIN_URL + '/latest', {
+      headers: { 'X-Master-Key': JSONBIN_KEY }
+    });
+    const data = await res.json();
+    allReviews = data.record.reviews || [];
+    renderReviews();
+  } catch {
+    document.getElementById('reviewsGrid').innerHTML = '<p style="text-align:center;color:var(--text-muted)">Could not load reviews.</p>';
+  }
+}
+
+// Render reviews
+function renderReviews() {
+  const grid = document.getElementById('reviewsGrid');
+  const sort = document.getElementById('rvSort').value;
+  const rvCount = document.getElementById('rvCount');
+
+  let sorted = [...allReviews];
+  if (sort === 'newest') sorted.reverse();
+  else if (sort === 'highest') sorted.sort((a,b) => b.rating - a.rating);
+  else if (sort === 'lowest') sorted.sort((a,b) => a.rating - b.rating);
+
+  rvCount.textContent = `${allReviews.length} review${allReviews.length !== 1 ? 's' : ''}`;
+
+  if (sorted.length === 0) {
+    grid.innerHTML = '<p style="text-align:center;color:var(--text-muted);grid-column:1/-1;">No reviews yet — be the first! ☕</p>';
+    return;
+  }
+
+  grid.innerHTML = sorted.map(r => {
+    const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+    const initials = r.name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+    const date = new Date(r.date).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
+    return `
+      <div class="review-card">
+        <div class="stars">${stars}</div>
+        <p>"${r.text}"</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">${initials}</div>
+          <div><strong>${r.name}</strong><span>${date}</span></div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// Submit review
+document.getElementById('rvSubmit').addEventListener('click', async () => {
+  const name = document.getElementById('rv-name').value.trim();
+  const text = document.getElementById('rv-text').value.trim();
+  const rvMsg = document.getElementById('rvMsg');
+
+  if (!name || !text || selectedStars === 0) {
+    rvMsg.style.color = '#c0392b';
+    rvMsg.textContent = 'Please fill in your name, rating, and review.';
+    return;
+  }
+
+  document.getElementById('rvSubmit').textContent = 'Submitting...';
+  document.getElementById('rvSubmit').disabled = true;
+
+  const newReview = { name, text, rating: selectedStars, date: new Date().toISOString() };
+  const updatedReviews = [...allReviews, newReview];
+
+  try {
+    const res = await fetch(JSONBIN_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-Master-Key': JSONBIN_KEY },
+      body: JSON.stringify({ reviews: updatedReviews })
+    });
+    if (res.ok) {
+      allReviews = updatedReviews;
+      renderReviews();
+      rvMsg.style.color = '#c0704a';
+      rvMsg.textContent = `Thanks ${name}! Your review is live. ☕`;
+      document.getElementById('rv-name').value = '';
+      document.getElementById('rv-text').value = '';
+      selectedStars = 0;
+      highlightStars(0);
+    } else {
+      rvMsg.style.color = '#c0392b';
+      rvMsg.textContent = 'Could not save review. Please try again.';
+    }
+  } catch {
+    rvMsg.style.color = '#c0392b';
+    rvMsg.textContent = 'Network error. Please try again.';
+  }
+
+  document.getElementById('rvSubmit').textContent = 'Submit Review';
+  document.getElementById('rvSubmit').disabled = false;
 });
-cookieDecline.addEventListener('click', () => {
-  localStorage.setItem('cookieConsent', 'declined');
-  cookieBanner.classList.remove('show');
-});
+
+// Sort change
+document.getElementById('rvSort').addEventListener('change', renderReviews);
+
+// Load reviews on page load
+fetchReviews();
