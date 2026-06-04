@@ -573,3 +573,44 @@ body.dark .cookie-banner { background: #1a0e08; }
   .cookie-content { flex-direction: column; text-align: center; }
   .cookie-btns { width: 100%; justify-content: center; }
 }
+
+/* ── REAL-TIME REVIEWS ── */
+.review-form-box {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 2.5rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.review-form-box h3 { font-size: 1.3rem; color: var(--brown); margin-bottom: 1.5rem; }
+
+.star-picker {
+  display: flex;
+  gap: 6px;
+  font-size: 2rem;
+  cursor: pointer;
+  margin-top: 4px;
+}
+.star-picker span { color: var(--beige); transition: color 0.15s, transform 0.15s; }
+.star-picker span:hover,
+.star-picker span.active { color: var(--terracotta); transform: scale(1.2); }
+
+.reviews-live-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.rv-count { font-weight: 700; color: var(--brown); font-size: 15px; }
+.rv-sort { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-muted); }
+.rv-sort select { padding: 6px 12px; border-radius: 8px; border: 1.5px solid var(--beige); background: var(--white); font-family: 'Lato', sans-serif; color: var(--text); outline: none; cursor: pointer; }
+.rv-loading { text-align: center; color: var(--text-muted); font-style: italic; padding: 2rem; grid-column: 1/-1; }
+
+body.dark .review-form-box { background: var(--white); }
+body.dark .star-picker span { color: var(--beige); }
+body.dark .rv-sort select { background: var(--white); border-color: var(--beige); color: var(--text); }
