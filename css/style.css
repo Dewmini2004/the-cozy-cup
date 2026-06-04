@@ -292,3 +292,196 @@ h2 { font-size: 2.4rem; color: var(--brown); margin-bottom: 2rem; }
   h2 { font-size: 1.9rem; }
   .reservation-form { padding: 1.5rem; }
 }
+
+/* ── PROMO BANNER ── */
+.promo-banner {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1100;
+  background: linear-gradient(90deg, var(--terracotta), #a0522d);
+  color: var(--white);
+  text-align: center;
+  padding: 10px 3rem;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.promo-banner strong { font-weight: 700; }
+.promo-close {
+  position: absolute;
+  right: 1.2rem;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.promo-close:hover { opacity: 1; }
+body.promo-active { padding-top: 42px; }
+
+/* ── DARK MODE TOGGLE ── */
+.dark-toggle {
+  background: none;
+  border: 2px solid var(--beige);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, transform 0.2s;
+  flex-shrink: 0;
+}
+.dark-toggle:hover { border-color: var(--terracotta); transform: rotate(20deg); }
+
+/* ── DARK MODE STYLES ── */
+body.dark {
+  --cream: #1a1108;
+  --white: #241a10;
+  --beige: #3a2a1a;
+  --text: #f0e0cc;
+  --text-muted: #c0a080;
+  --brown: #e8c9a0;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+body.dark .navbar { background: rgba(26,17,8,0.97); }
+body.dark .promo-banner { background: linear-gradient(90deg, #8b3a20, #6b2a10); }
+body.dark .hero-photo { box-shadow: 0 20px 60px rgba(192,112,74,0.15); }
+body.dark .tab-btn { background: var(--beige); }
+body.dark .gallery-section { background: #110b04; }
+body.dark .footer { background: #110b04; }
+
+/* ── WHATSAPP BUTTON ── */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 999;
+  background: #25D366;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px 12px 16px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: pulse-wa 2.5s ease-in-out infinite;
+}
+.whatsapp-btn:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 8px 28px rgba(37,211,102,0.5);
+  animation: none;
+}
+@keyframes pulse-wa {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+  50% { box-shadow: 0 4px 32px rgba(37,211,102,0.7); }
+}
+
+@media (max-width: 768px) {
+  .whatsapp-btn span { display: none; }
+  .whatsapp-btn { padding: 14px; border-radius: 50%; }
+  .promo-banner { font-size: 12px; padding: 10px 2.5rem; }
+}
+
+/* ── PROMO BANNER ── */
+.promo-banner {
+  background: linear-gradient(90deg, var(--terracotta), var(--brown));
+  color: var(--white);
+  text-align: center;
+  padding: 12px 3rem;
+  font-size: 14px;
+  position: relative;
+  z-index: 1100;
+}
+.promo-banner strong { font-weight: 700; }
+.promo-close {
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.promo-close:hover { opacity: 1; }
+
+/* Shift navbar down when banner is visible */
+.navbar { top: 0; transition: top 0.3s; }
+
+/* ── DARK TOGGLE BUTTON ── */
+.dark-toggle {
+  background: none;
+  border: 1.5px solid var(--beige);
+  border-radius: 50px;
+  padding: 6px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  margin-left: 1rem;
+}
+.dark-toggle:hover { background: var(--beige); }
+
+/* ── DARK MODE ── */
+body.dark {
+  --cream: #1a1210;
+  --white: #241a16;
+  --beige: #3a2820;
+  --text: #f0e0cc;
+  --text-muted: #c4a882;
+  --brown: #e8c4a0;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+body.dark .navbar { background: rgba(26,18,16,0.96); }
+body.dark .promo-banner { background: linear-gradient(90deg, #8b3a1e, #3a1a10); }
+body.dark .tab-btn { background: var(--white); }
+body.dark .hero-photo { box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+body.dark .reservation-form { background: var(--white); }
+body.dark .form-group input,
+body.dark .form-group select,
+body.dark .form-group textarea { background: var(--cream); border-color: var(--beige); color: var(--text); }
+body.dark .gallery-section { background: #0e0908; }
+body.dark .footer { background: #0e0908; }
+body.dark .dark-toggle { border-color: #3a2820; }
+
+/* ── WHATSAPP BUTTON ── */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 999;
+  background: #25D366;
+  border-radius: 50%;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: pulse-wa 2.5s infinite;
+}
+.whatsapp-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(37,211,102,0.55);
+  animation: none;
+}
+@keyframes pulse-wa {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+  50% { box-shadow: 0 4px 32px rgba(37,211,102,0.7); }
+}
